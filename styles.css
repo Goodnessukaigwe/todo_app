@@ -12,10 +12,15 @@ h1 {
   color: #333;
 }
 
+.input-container {
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
 input[type="text"] {
   padding: 0.5rem;
-  width: 100%;
-  margin-bottom: 1rem;
+  flex: 1;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
@@ -32,6 +37,14 @@ button {
 
 button:hover {
   background-color: #45a049;
+}
+
+.delete-btn {
+  background-color: #f44336 !important;
+}
+
+.delete-btn:hover {
+  background-color: #da190b !important;
 }
 
 .todo-item {
@@ -51,4 +64,46 @@ button:hover {
 
 .todo-item span {
   cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.modal-content p {
+  margin: 1rem 0;
+  color: #666;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.modal-buttons button {
+  margin: 0;
 }
