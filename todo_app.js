@@ -3,13 +3,20 @@ let editingId = null;
 let taskToDelete = null;
 
 const TODO_INPUT = document.getElementById('todoInput');
+const TODO_FORM = document.getElementById('todoForm');
 const TASK_LIST = document.getElementById('todoList');
 const DELETE_MODAL = document.getElementById('deleteModal');
 const CONFIRM_DELETE_BTN = document.getElementById('confirmDelete');
 const CANCEL_DELETE_BTN = document.getElementById('cancelDelete');
+const ADD_BUTTON = document.querySelector('button[type="submit"]');
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function updateAddButtonState() {
+  const text = TODO_INPUT.value.trim();
+  ADD_BUTTON.disabled = text === '';
 }
 
 function renderTasks() {
@@ -106,11 +113,12 @@ function cancelEdit() {
   renderTasks();
 }
 
-TODO_INPUT.addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
-    addTask();
-  }
+TODO_FORM.addEventListener('submit', function(event) {
+  event.preventDefault();
+  addTask();
 });
+
+TODO_INPUT.addEventListener('input', updateAddButtonState);
 
 // Modal event listeners
 CONFIRM_DELETE_BTN.addEventListener('click', confirmDelete);
@@ -124,3 +132,4 @@ DELETE_MODAL.addEventListener('click', function(event) {
 });
 
 renderTasks();
+updateAddButtonState();
