@@ -9,6 +9,7 @@ const DELETE_MODAL = document.getElementById('deleteModal');
 const CONFIRM_DELETE_BTN = document.getElementById('confirmDelete');
 const CANCEL_DELETE_BTN = document.getElementById('cancelDelete');
 const ADD_BUTTON = document.querySelector('button[type="submit"]');
+const NO_TASKS_MESSAGE = document.getElementById('noTasksMessage');
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -21,6 +22,13 @@ function updateAddButtonState() {
 
 function renderTasks() {
   TASK_LIST.innerHTML = '';
+  
+  if (tasks.length === 0) {
+    NO_TASKS_MESSAGE.style.display = 'block';
+  } else {
+    NO_TASKS_MESSAGE.style.display = 'none';
+  }
+  
   tasks.forEach(task => {
     const li = document.createElement('li');
     li.className = 'todo-item' + (task.completed ? ' completed' : '');
@@ -54,6 +62,7 @@ function addTask() {
 
   tasks.push({ id: Date.now(), text, completed: false });
   TODO_INPUT.value = '';
+  updateAddButtonState();
   saveTasks();
   renderTasks();
 }
